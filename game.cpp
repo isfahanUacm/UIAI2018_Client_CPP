@@ -13,7 +13,7 @@ Game::Game(string server_Address, unsigned int server_port, string name)
 
 bool Game::connect_server( )
 {
-    socket = new QTcpSocket(this);
+    socket = new QTcpSocket(nullptr);
     socket->connectToHost(QString::fromStdString(serverAddress) , serverport);
     return (socket->waitForConnected(20000));
 }
@@ -30,55 +30,49 @@ void Game::start()
     Player *players = Strategy::Setup_players();
     string formation = "formation ";
     for(int i=0;i<5;i++)
-        formation += players[i].get_player_name() + ":"
-                + std::to_string(players[i].get_player_First_pos().get_x()) + ":" + std::to_string(players[i].get_player_First_pos().get_y() )
+        formation += players[i].get_name() + ":"
+                + std::to_string(players[i].get_First_pos().get_x()) + ":" + std::to_string(players[i].get_First_pos().get_y() )
                 + (i==4 ? "" : ",");
 
     formation += "\n";
-    cout << formation << endl;
     socket->write(formation.c_str());
     socket->flush();
-
     while (true)
-    {
-        play_round();
-
-    }
+       play_round();
 }
 
 
 void Game::play_round()
 {
     cout << "CYCLE NUMBER : " <<cycleNum << endl;
-    socket->waitForReadyRead(10000);
+    socket->waitForReadyRead(15000);
     QString self = socket->readLine(1000);
-    cout << self.toStdString() << endl;
+//    cout << "Self Position : " << self.toStdString() << endl;
     QStringList self_positions = self.split(',');
 
     QString opp = socket->readLine(1000);
-    cout << opp.toStdString() << endl;
+//    cout << opp.toStdString() << endl;
     QStringList opp_positions = opp.split(',');
+
     QString ball_position = socket->readLine(1000);
-    cout << ball_position.toStdString() << endl;
+//    cout << ball_position.toStdString() << endl;
+
 
     for(int i=0;i<5;i++)
     {
-//        MyTeam->get_players()[i].set_player_position(Pos(6,7));
-
-        MyTeam->get_players()[i].set_player_position(Pos(self_positions.at(i).split(':').at(0).toInt(),  self_positions.at(i).split(':').at(1).toInt() ));
-        OppTeam->get_players()[i].set_player_position(Pos(opp_positions[i].split(':')[0].toInt() , opp_positions[i].split(':')[1].toInt() ));
+        MyTeam->get_players()[i].set_position(Pos(self_positions.at(i).split(':').at(0).toDouble(),  self_positions.at(i).split(':').at(1).toDouble() ));
+        OppTeam->get_players()[i].set_position(Pos(opp_positions[i].split(':')[0].toDouble() , opp_positions[i].split(':')[1].toDouble() ));
     }
-    ball->set_Ball_Position(Pos(ball_position.split(':')[0].toInt() , ball_position.split(':')[1].toInt()));
+
+    ball->set_Position(Pos(ball_position.split(':')[0].toDouble() , ball_position.split(':')[1].toDouble()));
     QString s = socket->readLine(1000);
-    cout << s.toStdString() << endl;
     QStringList scores  = s.split(',');
 
     MyTeam->set_score(scores[0].toInt());
     OppTeam->set_score(scores[1].toInt());
     cycleNum = scores[2].toInt();
 
-    kick(Strategy::do_turn());
-
+    kick(Strategy::do_turn(this));
 }
 
 int Game::get_cycleNum()
@@ -88,12 +82,25 @@ int Game::get_cycleNum()
 
 void Game::kick(Triple triple)
 {
-    cout << "HEEEEEEEEEEEEEEEEEEE" << endl;
     socket->write(triple.toString().c_str());
     cout << triple.toString().c_str() << endl;
-    socket->waitForBytesWritten(3000);
+    socket->waitForBytesWritten(5000);
     socket->flush();
-    cout << "SHEEEEEEEEEEEEEEEEEEEEEEE" << endl;
     return;
+}
+
+Team *Game::get_myTeam()
+{
+    return MyTeam;
+}
+
+Team *Game::get_oppTeam()
+{
+    return OppTeam;
+}
+
+Ball *Game::get_ball()
+{
+    return ball;
 }
 

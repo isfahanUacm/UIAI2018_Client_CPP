@@ -6,14 +6,17 @@
 #include "player.h"
 #include "triple.h"
 
+class Game;
+
 using namespace std;
 
 class Strategy
 {
+
 public:
     Strategy();
     static Player *Setup_players();
-    static Triple do_turn();
+    static Triple do_turn( Game *game);
 
 };
 

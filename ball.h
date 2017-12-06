@@ -8,8 +8,8 @@ class Ball
     Pos ballPos;
 public:
     Ball(); // @TODO set ball in middle of field
-    Pos get_Ball_Position ();
-    void set_Ball_Position (Pos pos);
+    Pos get_Position ();
+    void set_Position (Pos pos);
 };
 
 #endif // BALL_H

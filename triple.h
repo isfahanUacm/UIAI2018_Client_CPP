@@ -7,8 +7,6 @@ class Triple
     int PlayerId;
     double angle;
     double power;
-
-
 public:
     Triple(int id_, double angle_, double power_);
     void set_player_id (int PlayerId_);

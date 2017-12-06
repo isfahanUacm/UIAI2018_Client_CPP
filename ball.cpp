@@ -2,15 +2,14 @@
 
 Ball::Ball()
 {
-
 }
 
-void Ball::set_Ball_Position(Pos pos)
+void Ball::set_Position(Pos pos)
 {
     ballPos = pos ;
 }
 
-Pos Ball::get_Ball_Position()
+Pos Ball::get_Position()
 {
     return ballPos;
 }

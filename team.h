@@ -7,15 +7,16 @@ using namespace std;
 
 class Team
 {
+    friend class Game;
     string TeamName;
     Player *players;
     int score;
+    void set_score(int score_);
 
 public:
     Team();
     Player *get_players();
     int get_score();
-    void set_score(int score_);
 };
 
 #endif // TEAM_H

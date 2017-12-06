@@ -3,14 +3,15 @@
 #include <QStringList>
 #include "team.h"
 #include "ball.h"
-#include "strategy.h"
+
 #include <QTcpSocket>
 #include <string>
 #include <QString>
 #include <iostream>
+
 using namespace std;
 
-class Game : public QObject
+class Game
 {
 
     int cycleNum = 0;
@@ -23,15 +24,17 @@ class Game : public QObject
     int serverport;
     string teamName;
 
+    void play_round();
 
 public:
     Game(string  server_Address, unsigned int  server_port, string name);
     bool connect_server();
     void start();
-    void play_round();
     int get_cycleNum();
-
     void kick (Triple triple);
+    Team *get_myTeam();
+    Team *get_oppTeam();
+    Ball *get_ball();
 
 };
 

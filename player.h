@@ -15,13 +15,12 @@ public:
     Player();
     Player(int id, string name_ , Pos firstPos_) ;
 
-    void set_player_position(Pos pos_);
-
-    string get_player_name();
-    Pos get_player_pos();
-    Pos get_player_First_pos();
-    int get_player_score();
-    int get_player_id();
+    void set_position(Pos pos_);
+    string get_name();
+    Pos get_pos();
+    Pos get_First_pos();
+    int get_score();
+    int get_id();
 };
 
 #endif // PLAYER_H
