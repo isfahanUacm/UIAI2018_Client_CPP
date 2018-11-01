@@ -8,7 +8,7 @@ int main()
     Game game("127.0.0.1" , 9595 , "team2" ) ;
     if(game.connect_server())
     {
-        game.start();
+		game.start();
     }
 
 }
