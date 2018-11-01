@@ -25,8 +25,8 @@ void Game::start()
     socket->flush();
 
     //LOGO
-    socket->write("logo null \n");
-    socket->flush();
+//    socket->write("logo null \n");
+//    socket->flush();
     Player *players = Strategy::Setup_players();
     string formation = "formation ";
     for(int i=0;i<5;i++)
@@ -47,8 +47,17 @@ void Game::play_round()
     cout << "CYCLE NUMBER : " <<cycleNum << endl;
     socket->waitForReadyRead(15000);
     QString self = socket->readLine(1000);
+    cout << "SELF DATA : " << self.toStdString().substr(0,3) << endl;
+    if(self.trimmed().toStdString()== "END")
+    {
+        cout << "EXIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIT" << endl;
+        socket->close();
+        exit(0);
+        cout << "________________________________$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
+    }
 //    cout << "Self Position : " << self.toStdString() << endl;
     QStringList self_positions = self.split(',');
+
 
     QString opp = socket->readLine(1000);
 //    cout << opp.toStdString() << endl;
