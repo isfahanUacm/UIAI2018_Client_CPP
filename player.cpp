@@ -4,9 +4,8 @@ Player::Player()
 {
 }
 
-Player::Player(int id_ , string name_, Pos firstPos_)
+Player::Player(string name_, Pos firstPos_)
 {
-    this->id = id_;
     this->name = name_;
     this->firstPos = firstPos_;
 
@@ -27,10 +26,6 @@ string Player::get_name()
     return name;
 }
 
-int Player::get_id()
-{
-    return id;
-}
 
 Pos Player::get_pos()
 {

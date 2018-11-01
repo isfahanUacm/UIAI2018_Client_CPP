@@ -86,13 +86,16 @@ void Game::start()
 	//LOGO
 //	socket->write("logo null \n");
 //	socket->flush();
-	string logo = "logo null \n";
-	l = send(sock,logo.c_str(),strlen(logo.c_str()),0);
-	flag = 0;
-	//setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
-	if (l< 0){
-		printf("ERROR!");
-	};
+
+
+//	string logo = "logo null \n";
+//	l = send(sock,logo.c_str(),strlen(logo.c_str()),0);
+//	flag = 0;
+//	//setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
+//	if (l< 0){
+//		printf("ERROR!");
+//	};
+
 
 	Player *players = Strategy::Setup_players();
 	string formation = "formation ";
@@ -130,6 +133,11 @@ void Game::play_round()
 
 	//cout << "Self Position : " << self.toStdString() << endl;
 	QString s = QString::fromUtf8(buf);
+    if(s.trimmed().toStdString() == "END")
+    {
+        cout << "EXIIIIIIIIIIIIIIIIIIIIT" << endl;
+        exit(0);
+    }
 	QStringList self_positions = s.split(',');
 
 //    QString opp = socket->readLine(1000);
