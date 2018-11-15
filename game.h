@@ -1,13 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
-#include <QStringList>
 #include "team.h"
 #include "ball.h"
 
-#include <QTcpSocket>
 #include <string>
-#include <QString>
 #include <iostream>
+#include <vector>
 
 
 #ifdef _WIN32
@@ -44,11 +42,12 @@ class Game
 	//
 	int sock;
 	struct sockaddr_in server;
+    vector<string> explode(const string& s , const char& c);
 
 public:
-    Game(string  server_Address, unsigned int  server_port, string name);
+    Game(string  server_Address, unsigned int  server_port);
     bool connect_server();
-    void start();
+    void start(string name);
     int get_cycleNum();
     void kick (Triple triple);
     Team *get_myTeam();

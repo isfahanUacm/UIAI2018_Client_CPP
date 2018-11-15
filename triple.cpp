@@ -1,5 +1,12 @@
 #include "triple.h"
 
+Triple::Triple()
+{
+    PlayerId = 0;
+    angle = 0;
+    power = 100;
+}
+
 Triple::Triple(int id_, double angle_, double power_ )
 {
     PlayerId = id_;
@@ -7,17 +14,17 @@ Triple::Triple(int id_, double angle_, double power_ )
     power = power_;
 }
 
-void Triple::set_player_id(int PlayerId_)
+void Triple::setPlayerID(int PlayerId_)
 {
     PlayerId = PlayerId_;
 }
 
-void Triple::set_angle(double angle_)
+void Triple::setAngle(double angle_)
 {
     angle = angle_;
 }
 
-void Triple::set_power(double power_)
+void Triple::setPower(double power_)
 {
     power = power_;
 }

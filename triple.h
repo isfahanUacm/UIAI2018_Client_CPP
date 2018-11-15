@@ -8,10 +8,11 @@ class Triple
     double angle;
     double power;
 public:
+    Triple();
     Triple(int id_, double angle_, double power_);
-    void set_player_id (int PlayerId_);
-    void set_angle (double angle_);
-    void set_power (double power_);
+    void setPlayerID (int PlayerId_);
+    void setAngle (double angle_);
+    void setPower (double power_);
     string toString(void);
 };
 
