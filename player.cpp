@@ -11,10 +11,6 @@ Player::Player(string name_, Pos firstPos_)
 
 }
 
-int Player::get_score()
-{
-    return score;
-}
 
 void Player::set_position(Pos pos_)
 {

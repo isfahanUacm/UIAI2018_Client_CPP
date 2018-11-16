@@ -3,6 +3,7 @@
 
 class Pos
 {
+private:
     double x;
     double y;
 
@@ -12,8 +13,6 @@ public:
 
     double get_y();
     double get_x();
-
-
 };
 
 #endif // POS_H

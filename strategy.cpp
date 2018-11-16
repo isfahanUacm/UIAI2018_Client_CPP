@@ -39,7 +39,7 @@ Triple Strategy::do_turn(Game *game)
     //Sample code for shooting a random player in the ball direction with the maximum power:
     int your_player_Id = rand() % 5;
     act.setPlayerID(your_player_Id);
-
+	
     double x1,x2,y1,y2;
     x1 = game->get_myTeam()->get_players()[your_player_Id].get_pos().get_x();
     y1 = game->get_myTeam()->get_players()[your_player_Id].get_pos().get_y();
@@ -62,9 +62,9 @@ Triple Strategy::do_turn(Game *game)
             degree_angle = 180 - degree_angle;
     }
     act.setAngle(degree_angle);
-
     act.setPower(100);
-
+	
+	
     return act;
 
 

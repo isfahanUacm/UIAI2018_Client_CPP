@@ -26,7 +26,9 @@
 
 class Game
 {
+private:
 
+	friend int main();
     int cycleNum = 0;
     Team *MyTeam;
     Team *OppTeam;
@@ -43,13 +45,15 @@ class Game
 	int sock;
 	struct sockaddr_in server;
     vector<string> explode(const string& s , const char& c);
+	bool connect_server();
+	void start(string name);
+	void kick(Triple triple);
 
 public:
     Game(string  server_Address, unsigned int  server_port);
-    bool connect_server();
-    void start(string name);
+
     int get_cycleNum();
-    void kick (Triple triple);
+
     Team *get_myTeam();
     Team *get_oppTeam();
     Ball *get_ball();
