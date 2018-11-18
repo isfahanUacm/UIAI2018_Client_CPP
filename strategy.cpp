@@ -46,7 +46,7 @@ Triple Strategy::do_turn(Game *game)
     x2 = game->get_ball()->get_Position().get_x();
     y2 = game->get_ball()->get_Position().get_y();
 
-    double radian_angle = abs(atan((double)(y2-y1)/(double)(x2-x1)));//Calculate the angle from the chosen player to the ball
+    double radian_angle = abs((int)atan((double)(y2-y1)/(double)(x2-x1)));//Calculate the angle from the chosen player to the ball
     int degree_angle = radian_angle * (180.0/PI) ;
 
     if(x2>x1)

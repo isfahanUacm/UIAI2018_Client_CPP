@@ -1,8 +1,7 @@
 #include "game.h"
-#include <windows.h>
 #include<iostream>
 #include <stdio.h>
-#include<string>
+#include<string.h>
 
 using namespace  std;
 #pragma comment(lib, "Ws2_32.lib")
