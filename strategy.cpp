@@ -14,11 +14,11 @@ Player *Strategy::init_players()
     In case of setting wrong position, server will set default formation for your team.
      */
 
-    players[0] = Player("R. Ahmadi", Pos(-6.5,0));
-    players[1] = Player("E. Hajisafi", Pos(-2,1));
-    players[2] = Player("M. Karimi", Pos(-5,-2));
-    players[3] = Player("M. Navidkia", Pos(-5,2));
-    players[4] = Player("H. Aghili", Pos(-2,-1));
+    players[0] = Player("R. Ahmadi"  , Pos(-6.5,0) , 0);
+    players[1] = Player("E. Hajisafi", Pos(-2,1)   , 1);
+    players[2] = Player("M. Karimi"  , Pos(-5,-2)  , 2);
+    players[3] = Player("M. Navidkia", Pos(-5,2)   , 3);
+    players[4] = Player("H. Aghili"  , Pos(-2,-1)  , 4);
 
 
     return players;
@@ -63,8 +63,7 @@ Triple Strategy::do_turn(Game *game)
     }
     act.setAngle(degree_angle);
     act.setPower(100);
-	
-	
+
     return act;
 
 

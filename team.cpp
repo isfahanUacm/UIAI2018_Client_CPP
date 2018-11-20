@@ -4,7 +4,6 @@ using namespace std;
 
 Team::Team()
 {
-    Player *tmp = Strategy::init_players();
     players = new Player[5];
 }
 

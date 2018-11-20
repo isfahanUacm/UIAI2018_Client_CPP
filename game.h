@@ -35,7 +35,6 @@ private:
     Team *MyTeam;
     Team *OppTeam;
     Ball *ball;
-
     string serverAddress;
 	int serverPort;
     string teamName;
@@ -50,6 +49,7 @@ private:
 	bool connect_server();
 	void start(string name);
 	void kick(Triple triple);
+
 
 public:
     Game(string  server_Address, unsigned int  server_port);

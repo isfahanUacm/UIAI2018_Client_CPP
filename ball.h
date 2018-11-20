@@ -7,7 +7,7 @@ class Ball
 {
     Pos ballPos;
 public:
-    Ball(); // @TODO set ball in middle of field
+    Ball();
     Pos get_Position ();
 private:
     void set_Position (Pos pos);

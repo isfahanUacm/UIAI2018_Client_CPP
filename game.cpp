@@ -14,6 +14,8 @@ Game::Game(string server_Address, unsigned int server_port)
     MyTeam = new Team;
     OppTeam = new Team ;
     ball = new Ball;
+    MyTeam->players =  Strategy::init_players();
+
 }
 
 bool Game::connect_server( )
@@ -137,8 +139,6 @@ void Game::play_round()
         return; // error/disconnect
 
     string ball_position = buf;
-    Team MyTeam_Test;
-    Team OppTeam_Test;
     for(int i=0;i<5;i++)
     {
         vector<string> self {explode(self_positions[i] , ':')};
@@ -146,6 +146,8 @@ void Game::play_round()
 
         vector<string> opp {explode(opp_positions[i] , ':')};
         OppTeam->get_players()[i].set_position(Pos(stod(opp[0]) , stod(opp[1])));
+        OppTeam->get_players()[i].id = i;
+
    
 	}
 
@@ -154,7 +156,10 @@ void Game::play_round()
 
 
     ret = sgetline(sock, &buf);
+    if (ret < 0)
+        return; // error/disconnect
     s = buf;
+
     vector<string> scores {explode(s,',')};
 
     MyTeam->set_score(stoi(scores[0]));
