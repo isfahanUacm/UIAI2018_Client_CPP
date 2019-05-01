@@ -2,6 +2,7 @@
 
 Ball::Ball()
 {
+
 }
 
 void Ball::set_Position(Pos pos)

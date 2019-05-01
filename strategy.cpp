@@ -1,22 +1,25 @@
 #include "strategy.h"
 #include "game.h"
+#define PI 3.14159265
 Strategy::Strategy()
 {
 
 }
 
-Player *Strategy::Setup_players()
+Player *Strategy::init_players()
 {
-
-    /*This is a stupid example code for formation of Players
-    ID , Name , FirstPos */
-
     Player *players = new Player[5];
-    players[0] = Player( "jafar" , Pos(-7,0));
-    players[1] = Player( "majid" , Pos(-4,-2));
-    players[2] = Player( "abbas" , Pos(-4,2));
-    players[3] = Player( "Mamad" , Pos(-1,-1));
-    players[4] = Player( "Kerim" , Pos(-1,1));
+    /*
+    Here you can set each of your player's name and your team formation.
+    In case of setting wrong position, server will set default formation for your team.
+     */
+
+    players[0] = Player("R. Ahmadi"  , Pos(-6.5,0) , 0);
+    players[1] = Player("E. Hajisafi", Pos(-2,1)   , 1);
+    players[2] = Player("M. Karimi"  , Pos(-5,-2)  , 2);
+    players[3] = Player("M. Navidkia", Pos(-5,2)   , 3);
+    players[4] = Player("H. Aghili"  , Pos(-2,-1)  , 4);
+
 
     return players;
 
@@ -24,35 +27,45 @@ Player *Strategy::Setup_players()
 
 Triple Strategy::do_turn(Game *game)
 {
-    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%MY Team" << endl;
-    cout << "Ball Pos: " << game->get_ball()->get_Position().get_x() << "  " << game->get_ball()->get_Position().get_y() << endl;
-    for(int i=0;i<5;i++)
+    Triple act;
+    /*
+    Write your code here
+    At the end you have to set 3 parameter:
+        player id -> act.setPlayerID()
+        angle -> act.setAngle()
+        power -> act.setPower()
+     */
+
+    //Sample code for shooting a random player in the ball direction with the maximum power:
+    int your_player_Id = rand() % 5;
+    act.setPlayerID(your_player_Id);
+	
+    double x1,x2,y1,y2;
+    x1 = game->get_myTeam()->get_players()[your_player_Id].get_pos().get_x();
+    y1 = game->get_myTeam()->get_players()[your_player_Id].get_pos().get_y();
+    x2 = game->get_ball()->get_Position().get_x();
+    y2 = game->get_ball()->get_Position().get_y();
+
+	double radian_angle = abs(atan((double)(y2-y1)/(double)(x2-x1)));//Calculate the angle from the chosen player to the ball
+    int degree_angle = radian_angle * (180.0/PI) ;
+
+    if(x2>x1)
     {
-    cout << "Player " << i  << ": id:"<< i << "  name:" << game->get_myTeam()->get_players()[i].get_name()
-         << "  pos:" << game->get_myTeam()->get_players()[i].get_pos().get_x() << " , " << game->get_myTeam()->get_players()[i].get_pos().get_y() << endl;
-
+        if(y2<y1)
+            degree_angle =360-degree_angle;
     }
-    cout << "SCORE:" << game->get_myTeam()->get_score() << endl;
-
-    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl << endl <<endl;
-
-    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%OPP Team" << endl;
-    for(int i=0;i<5;i++)
+    else
     {
-    cout << "Player " << i  << ": id:"<< i << "  name:" << game->get_oppTeam()->get_players()[i].get_name()
-         << "  pos:" << game->get_oppTeam()->get_players()[i].get_pos().get_x() << " , " << game->get_oppTeam()->get_players()[i].get_pos().get_y() << endl;
-
+        if(y2<y1)
+            degree_angle += 180;
+        else
+            degree_angle = 180 - degree_angle;
     }
-    cout << "SCORE:" << game->get_oppTeam()->get_score() << endl;
-    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl << endl;
+    act.setAngle(degree_angle);
+    act.setPower(100);
 
-    Team *myteam = game->get_myTeam();
-    Team *oppteam = game->get_oppTeam();
-    Ball *ball = game->get_ball();
+    return act;
 
-    Triple triple(0,0,0);
-
-    return triple;
 
 }
 

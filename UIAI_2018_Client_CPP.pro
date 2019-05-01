@@ -19,6 +19,12 @@ SOURCES += main.cpp \
     strategy.cpp \
     triple.cpp
 
+win32{
+    win32-g++{
+         LIBS += -L"lib" -lWS2_32
+       }
+}
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -35,7 +41,6 @@ HEADERS += \
     team.h \
     ball.h \
     pos.h \
-    consts.h \
     player.h \
     strategy.h \
     triple.h

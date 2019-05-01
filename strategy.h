@@ -2,6 +2,7 @@
 #define STRATEGY_H
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "pos.h"
 #include "player.h"
 #include "triple.h"
@@ -15,7 +16,7 @@ class Strategy
 
 public:
     Strategy();
-    static Player *Setup_players();
+    static Player *init_players();
     static Triple do_turn( Game *game);
 
 };
